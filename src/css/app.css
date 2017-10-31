@@ -1,0 +1,40 @@
+
+/* form field labels -- */
+.app-form-label {
+    font-size: 1.1rem;
+}
+
+.app-form-label::first-letter {
+    text-transform:uppercase;
+}
+
+/* get dates div/button -- */
+#idDatePicker {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.app-button {
+    font-size: 1.5rem;
+}
+
+/*
+    Date Picker Modal
+*/
+.modal-lg {
+    max-width: 80%;
+}
+
+/* calendar table -- */
+#calendarTable > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+            padding: 5px !important; /* currently 8px */
+            /*background-color: pink;*/
+}
+
+#calendarTable > thead > tr > th {
+    text-align: center;
+}
+
+.calendar-cell-button {
+    font-size: 1.1rem;
+}
