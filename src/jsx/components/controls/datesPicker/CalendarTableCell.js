@@ -1,30 +1,49 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-//import {Link} from 'react-router-dom';
 
-const CalendarTableCell = ({day}) => {
-  /*
-      button link number
-      cell attributes
-        background color
-        display # yes/no
-        link active/inactive
-  */
+class CalendarTableCell extends React.Component {
+   constructor(props, context) {
+    super(props, context);
 
-  //debugger;
+    this.handleClick = this.handleClick.bind(this);
 
-  let buttonText = "";
-  if (day > 0) {
-    buttonText = day.toString();
+  } // constructor
+
+
+  handleClick(e)  {
+
+    let selectDate = this.props.selectDate;
+    let day = this.props.day;
+
+    return selectDate(day);
   }
 
-  return (
-    <td ><button type="button" className="btn btn-link dp-calendar-cell-button">{buttonText}</button></td>
-  );
-};
+
+  render() {
+
+    let day = this.props.day;
+
+    let buttonText = "";
+    if (day > 0) {
+      buttonText = day.toString();
+    }
+
+    return (
+      <td >
+      <button type="button"
+        onClick={this.handleClick}
+        className="btn btn-link dp-calendar-cell-button">
+            {buttonText}</button></td>
+    );
+  }
+
+
+}
 
 CalendarTableCell.propTypes = {
+  day: PropTypes.number.isRequired,
+  selectDate: PropTypes.func.isRequired
+
 };
 
 export default CalendarTableCell;
-

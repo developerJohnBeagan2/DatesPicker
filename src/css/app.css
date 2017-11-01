@@ -38,13 +38,10 @@
 */
 
 /* calendar table -- */
-.dp-calendar-table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
-            padding: 5px !important; /* currently 8px */
-            /*background-color: pink;*/
-}
-
-.dp-calendar-table > thead > tr > th {
-    text-align: center;
+.dp-calendar-table > thead > tr > th,
+.dp-calendar-table > tbody > tr > td {
+            padding: 4px !important; /* currently 8px */
+            text-align: center;
 }
 
 .calendar-cell-button {

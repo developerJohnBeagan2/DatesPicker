@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import TableRow from './CalendarTableRow';
 import * as hf from './HelperFunctions';
 
@@ -13,12 +14,14 @@ class DatesPickerModal extends React.Component {
         this.state = {
           calendarArray: [],
           currentDate: new Date(),
-          monthName: ""
+          monthName: "",
+          selectedDates: []
         };
 
         this.saveDates = this.saveDates.bind(this);
         this.previousMonth = this.previousMonth.bind(this);
         this.nextMonth = this.nextMonth.bind(this);
+        this.selectDate = this.selectDate.bind(this);
 
   } // constructor
 
@@ -32,6 +35,9 @@ class DatesPickerModal extends React.Component {
     });
   }
 
+  selectDate(dayNum) {
+    alert("selected date: " + dayNum.toString());
+  }
 
   saveDates(event) {
     $('.dp-dates-pick').modal('hide');
@@ -59,6 +65,9 @@ class DatesPickerModal extends React.Component {
     });
   }
 
+
+
+
   render() {
 
     let tableRows = [];
@@ -70,9 +79,8 @@ class DatesPickerModal extends React.Component {
       else {
         days = this.state.calendarArray.slice(28);
       }
-      //debugger;
-      tableRows.push(<TableRow key={i} days={days} />);
-    }
+      tableRows.push(<TableRow key={i} days={days} selectDate={this.selectDate} />);
+    } // end for
 
     return (
       <div className="modal fade dp-dates-pick"
@@ -93,7 +101,7 @@ class DatesPickerModal extends React.Component {
 
             <div className="dp-select-month">
 
-              <table className="table dp-select-month-table">
+              <table className="table table-responsive-sm dp-select-month-table">
                 <tbody>
                   <tr>
                     <td>
@@ -126,7 +134,7 @@ class DatesPickerModal extends React.Component {
 
             </div>
 
-              <table className="table table-bordered dp-calendar-table">
+              <table className="table table-bordered table-responsive-sm dp-calendar-table">
                 <thead>
                   <tr>
                     <th>Sun</th>
@@ -160,7 +168,6 @@ class DatesPickerModal extends React.Component {
 }
 
 DatesPickerModal.propTypes = {
-  //children: PropTypes.node
 };
 
 
