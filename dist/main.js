@@ -54069,7 +54069,9 @@ var DatesPickerModal = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (DatesPickerModal.__proto__ || Object.getPrototypeOf(DatesPickerModal)).call(this, props, context));
 
     _this.state = {
-      calendarArray: []
+      calendarArray: [],
+      currentDate: new Date(),
+      monthName: ""
     };
 
     _this.saveDates = _this.saveDates.bind(_this);
@@ -54083,8 +54085,11 @@ var DatesPickerModal = function (_React$Component) {
   _createClass(DatesPickerModal, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
+      var currentDate = hf.calcFirstDateofMonth(new Date());
       this.setState({
-        calendarArray: hf.makeDateArray(new Date())
+        currentDate: currentDate,
+        calendarArray: hf.makeDateArray(currentDate),
+        monthName: hf.getMonthName(currentDate)
       });
     }
   }, {
@@ -54095,12 +54100,26 @@ var DatesPickerModal = function (_React$Component) {
   }, {
     key: 'previousMonth',
     value: function previousMonth(event) {
-      alert('previous month');
+      var currentDate = this.state.currentDate;
+      var newDate = hf.calcFirstDateofMonth(currentDate);
+      newDate.setMonth(newDate.getMonth() - 1);
+      this.setState({
+        currentDate: newDate,
+        calendarArray: hf.makeDateArray(newDate),
+        monthName: hf.getMonthName(newDate)
+      });
     }
   }, {
     key: 'nextMonth',
     value: function nextMonth(event) {
-      alert('next month');
+      var currentDate = this.state.currentDate;
+      var newDate = hf.calcFirstDateofMonth(currentDate);
+      newDate.setMonth(newDate.getMonth() + 1);
+      this.setState({
+        currentDate: newDate,
+        calendarArray: hf.makeDateArray(newDate),
+        monthName: hf.getMonthName(newDate)
+      });
     }
   }, {
     key: 'render',
@@ -54154,32 +54173,65 @@ var DatesPickerModal = function (_React$Component) {
                 'div',
                 { className: 'dp-select-month' },
                 _react2.default.createElement(
-                  'button',
-                  {
-                    type: 'button', 'aria-label': 'Left month',
-                    className: 'btn dp-previous-month',
-                    onClick: this.previousMonth
-                  },
-                  _react2.default.createElement('i', { 'aria-hidden': 'true', className: 'far fa-angle-left' })
-                ),
-                _react2.default.createElement(
-                  'span',
-                  { className: 'dp-month-name' },
-                  'October'
-                ),
-                _react2.default.createElement(
-                  'button',
-                  {
-                    type: 'button', 'aria-label': 'Right month',
-                    className: 'btn dp-next-month',
-                    onClick: this.nextMonth
-                  },
-                  _react2.default.createElement('i', { 'aria-hidden': 'true', className: 'far fa-angle-right' })
+                  'table',
+                  { className: 'table dp-select-month-table' },
+                  _react2.default.createElement(
+                    'tbody',
+                    null,
+                    _react2.default.createElement(
+                      'tr',
+                      null,
+                      _react2.default.createElement(
+                        'td',
+                        null,
+                        _react2.default.createElement(
+                          'button',
+                          {
+                            type: 'button', 'aria-label': 'Left month',
+                            className: 'btn dp-previous-month dp-icon-size',
+                            onClick: this.previousMonth
+                          },
+                          _react2.default.createElement('i', { 'aria-hidden': 'true', className: 'far fa-angle-left' })
+                        )
+                      ),
+                      _react2.default.createElement(
+                        'td',
+                        null,
+                        _react2.default.createElement(
+                          'span',
+                          { className: 'dp-month-name' },
+                          this.state.monthName
+                        )
+                      ),
+                      _react2.default.createElement(
+                        'td',
+                        null,
+                        _react2.default.createElement(
+                          'span',
+                          { className: 'dp-year text-muted' },
+                          this.state.currentDate.getFullYear().toString()
+                        )
+                      ),
+                      _react2.default.createElement(
+                        'td',
+                        null,
+                        _react2.default.createElement(
+                          'button',
+                          {
+                            type: 'button', 'aria-label': 'Right month',
+                            className: 'btn dp-next-month dp-icon-size',
+                            onClick: this.nextMonth
+                          },
+                          _react2.default.createElement('i', { 'aria-hidden': 'true', className: 'far fa-angle-right' })
+                        )
+                      )
+                    )
+                  )
                 )
               ),
               _react2.default.createElement(
                 'table',
-                { id: 'calendarTable', className: 'table table-bordered dp-calendar-table' },
+                { className: 'table table-bordered dp-calendar-table' },
                 _react2.default.createElement(
                   'thead',
                   null,
@@ -54378,9 +54430,16 @@ exports.default = CalendarTableCell;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+exports.getMonthName = getMonthName;
 exports.makeDateArray = makeDateArray;
 exports.calcFirstDateofMonth = calcFirstDateofMonth;
 exports.calcLastDateofMonth = calcLastDateofMonth;
+var monthNames = exports.monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+function getMonthName(calendarDate) {
+    return monthNames[calendarDate.getMonth()];
+}
+
 function makeDateArray(calendarDate) {
     var dateArray = Array(35);
     dateArray.fill(0);

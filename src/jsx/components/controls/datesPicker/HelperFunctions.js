@@ -1,3 +1,9 @@
+export const monthNames = ["January", "February", "March", "April", "May", "June",
+"July", "August", "September", "October", "November", "December"];
+
+export function getMonthName(calendarDate) {
+  return monthNames[calendarDate.getMonth()];
+}
 
 export function makeDateArray(calendarDate) {
     let dateArray = Array(35);

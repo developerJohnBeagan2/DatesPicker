@@ -11,7 +11,9 @@ class DatesPickerModal extends React.Component {
         super(props, context);
 
         this.state = {
-          calendarArray: []
+          calendarArray: [],
+          currentDate: new Date(),
+          monthName: ""
         };
 
         this.saveDates = this.saveDates.bind(this);
@@ -22,8 +24,11 @@ class DatesPickerModal extends React.Component {
 
 
   componentWillMount() {
+    let currentDate = hf.calcFirstDateofMonth(new Date());
     this.setState({
-      calendarArray: hf.makeDateArray(new Date())
+      currentDate: currentDate,
+      calendarArray: hf.makeDateArray(currentDate),
+      monthName: hf.getMonthName(currentDate)
     });
   }
 
@@ -33,11 +38,25 @@ class DatesPickerModal extends React.Component {
   }
 
   previousMonth(event) {
-    alert('previous month');
+    let currentDate = this.state.currentDate;
+    let newDate = hf.calcFirstDateofMonth(currentDate);
+    newDate.setMonth(newDate.getMonth() - 1);
+    this.setState({
+      currentDate: newDate,
+      calendarArray: hf.makeDateArray(newDate),
+      monthName: hf.getMonthName(newDate)
+    });
   }
 
   nextMonth(event) {
-    alert('next month');
+    let currentDate = this.state.currentDate;
+    let newDate = hf.calcFirstDateofMonth(currentDate);
+    newDate.setMonth(newDate.getMonth() + 1);
+    this.setState({
+      currentDate: newDate,
+      calendarArray: hf.makeDateArray(newDate),
+      monthName: hf.getMonthName(newDate)
+    });
   }
 
   render() {
@@ -71,29 +90,43 @@ class DatesPickerModal extends React.Component {
 
             <div className="modal-body">
 
+
             <div className="dp-select-month">
 
-              <button
-                type="button" aria-label="Left month"
-                className="btn dp-previous-month"
-                onClick={this.previousMonth}
-              >
-                <i aria-hidden="true" className="far fa-angle-left" />
-              </button>
-
-              <span className="dp-month-name">October</span>
-
-              <button
-                type="button" aria-label="Right month"
-                className="btn dp-next-month"
-                onClick={this.nextMonth}
-              >
-                <i aria-hidden="true" className="far fa-angle-right"/>
-              </button>
+              <table className="table dp-select-month-table">
+                <tbody>
+                  <tr>
+                    <td>
+                        <button
+                          type="button" aria-label="Left month"
+                          className="btn dp-previous-month dp-icon-size"
+                          onClick={this.previousMonth}
+                        >
+                          <i aria-hidden="true" className="far fa-angle-left" />
+                        </button>
+                    </td>
+                    <td>
+                      <span className="dp-month-name">{this.state.monthName}</span>
+                    </td>
+                    <td>
+                      <span className="dp-year text-muted">{this.state.currentDate.getFullYear().toString()}</span>
+                    </td>
+                    <td>
+                      <button
+                        type="button" aria-label="Right month"
+                        className="btn dp-next-month dp-icon-size"
+                        onClick={this.nextMonth}
+                      >
+                        <i aria-hidden="true" className="far fa-angle-right"/>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
 
             </div>
 
-              <table id="calendarTable" className="table table-bordered dp-calendar-table">
+              <table className="table table-bordered dp-calendar-table">
                 <thead>
                   <tr>
                     <th>Sun</th>

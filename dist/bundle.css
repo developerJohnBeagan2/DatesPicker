@@ -5290,12 +5290,34 @@ button.toast-close-button {
 */
 .modal-lg {
   max-width: 80%; }
+/* select-month table -- */
+.dp-select-month-table > tbody > tr > td {
+  text-align: center;
+  vertical-align: middle;
+  padding: 4px !important;
+  /* currently 8px */
+  border: none; }
+/*
+    background-color: pink;
+*/
 /* calendar table -- */
-#calendarTable > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+.dp-calendar-table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
   padding: 5px !important;
   /* currently 8px */
   /*background-color: pink;*/ }
-#calendarTable > thead > tr > th {
+.dp-calendar-table > thead > tr > th {
   text-align: center; }
 .calendar-cell-button {
   font-size: 1.1rem; }
+.dp-select-month {
+  margin-bottom: 10px; }
+.dp-icon-size {
+  font-size: 2rem; }
+.dp-month-name {
+  font-size: 2rem;
+  margin-left: 5px;
+  margin-right: 5px; }
+.dp-year {
+  font-size: 2rem;
+  margin-left: 5px;
+  margin-right: 5px; }
