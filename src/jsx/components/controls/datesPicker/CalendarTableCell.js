@@ -11,17 +11,15 @@ class CalendarTableCell extends React.Component {
 
 
   handleClick(e)  {
-
-    let selectDate = this.props.selectDate;
-    let day = this.props.day;
-
+    const selectDate = this.props.selectDate;
+    const day = this.props.day;
     return selectDate(day);
   }
 
 
   render() {
 
-    let day = this.props.day;
+    const day = this.props.day;
 
     let buttonText = "";
     if (day > 0) {

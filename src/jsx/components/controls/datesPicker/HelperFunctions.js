@@ -15,7 +15,6 @@ export function makeDateArray(calendarDate) {
     for (let i = 1; i <= dayNumber; i++) {
         dateArray[offset + i - 1] = i;
     }
-//debugger;
     return dateArray;
 }
 
@@ -25,20 +24,46 @@ export function calcFirstDateofMonth(calendarDate) {
 }
 
 export function calcLastDateofMonth(calendarDate) {
-    let yearNum = calendarDate.getFullYear();
-    let monthNum = calendarDate.getMonth();
-    if (monthNum >= 0 && monthNum <= 10) {
-        monthNum++;
-    }
-    else {
-        monthNum = 0;
-        yearNum++;
-    }
-    // first day of next month
-    let firstofNext = new Date(yearNum, monthNum, 1);
-    // call last day of this month
-    let lastofMonth = new Date(firstofNext.setDate(firstofNext.getDate() - 1));
-    return lastofMonth;
+  let yearNum = calendarDate.getFullYear();
+  let monthNum = calendarDate.getMonth();
+  if (monthNum >= 0 && monthNum <= 10) {
+      monthNum++;
+  }
+  else {
+      monthNum = 0;
+      yearNum++;
+  }
+  // first day of next month
+  let firstofNext = new Date(yearNum, monthNum, 1);
+  // last day of this month
+  let lastofMonth = new Date(firstofNext.setDate(firstofNext.getDate() - 1));
+  return lastofMonth;
 }
+
+export function makeSelectedDateObject(currentDate, dayNum) {
+  let yearNum = currentDate.getFullYear();
+  let monthNum = currentDate.getMonth();
+  let dateIndex = (yearNum * 10000) + (monthNum * 100) + dayNum;
+  return { id: dateIndex, year: yearNum, month: monthNum, day: dayNum };
+}
+
+export function formatDateObject(dateObject) {
+  let date = new Date(dateObject.year, dateObject.month, dateObject.day );
+  let formattedDate = date.toLocaleDateString('en-US',
+    {weekday: 'short', year: 'numeric', month: 'long', day: 'numeric'});
+  return formattedDate;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import TableRow from './CalendarTableRow';
+import SelectedDateItem from './SelectedDateItem';
 import * as hf from './HelperFunctions';
 
 
@@ -22,12 +23,13 @@ class DatesPickerModal extends React.Component {
         this.previousMonth = this.previousMonth.bind(this);
         this.nextMonth = this.nextMonth.bind(this);
         this.selectDate = this.selectDate.bind(this);
+        this.removeDate = this.removeDate.bind(this);
 
   } // constructor
 
 
   componentWillMount() {
-    let currentDate = hf.calcFirstDateofMonth(new Date());
+    const currentDate = hf.calcFirstDateofMonth(new Date());
     this.setState({
       currentDate: currentDate,
       calendarArray: hf.makeDateArray(currentDate),
@@ -36,15 +38,32 @@ class DatesPickerModal extends React.Component {
   }
 
   selectDate(dayNum) {
-    alert("selected date: " + dayNum.toString());
+    // add to selectedDates array in state
+    const currentDate = this.state.currentDate;
+    let selectedDate = hf.makeSelectedDateObject(currentDate, dayNum);
+    this.setState((prevState) => {
+      let newList = [...prevState.selectedDates, selectedDate];
+      newList.sort( (first, second) => {
+          return (first.id - second.id);
+        });
+      return {selectedDates: newList};
+    });
   }
+
+  removeDate(dateObjectId) {
+    this.setState( (prevState) => {
+      let modifiedList = [...prevState.selectedDates.filter(d => d.id !== dateObjectId)];
+      return {selectedDates: modifiedList };
+    });
+  }
+
 
   saveDates(event) {
     $('.dp-dates-pick').modal('hide');
   }
 
   previousMonth(event) {
-    let currentDate = this.state.currentDate;
+    const currentDate = this.state.currentDate;
     let newDate = hf.calcFirstDateofMonth(currentDate);
     newDate.setMonth(newDate.getMonth() - 1);
     this.setState({
@@ -55,7 +74,7 @@ class DatesPickerModal extends React.Component {
   }
 
   nextMonth(event) {
-    let currentDate = this.state.currentDate;
+    const currentDate = this.state.currentDate;
     let newDate = hf.calcFirstDateofMonth(currentDate);
     newDate.setMonth(newDate.getMonth() + 1);
     this.setState({
@@ -64,8 +83,6 @@ class DatesPickerModal extends React.Component {
       monthName: hf.getMonthName(newDate)
     });
   }
-
-
 
 
   render() {
@@ -81,6 +98,17 @@ class DatesPickerModal extends React.Component {
       }
       tableRows.push(<TableRow key={i} days={days} selectDate={this.selectDate} />);
     } // end for
+
+    let selectedList = [];
+    const selectedDates = this.state.selectedDates;
+    selectedDates.forEach(dateObject => {
+      let formattedDate = hf.formatDateObject(dateObject);
+      selectedList.push(<SelectedDateItem
+        key={dateObject.id}
+        formattedDate={formattedDate}
+        selectedDate={dateObject}
+        removeDate={this.removeDate} />);
+    });
 
     return (
       <div className="modal fade dp-dates-pick"
@@ -98,7 +126,6 @@ class DatesPickerModal extends React.Component {
 
             <div className="modal-body">
 
-
             <div className="dp-select-month">
 
               <table className="table table-responsive-sm dp-select-month-table">
@@ -106,11 +133,12 @@ class DatesPickerModal extends React.Component {
                   <tr>
                     <td>
                         <button
-                          type="button" aria-label="Left month"
-                          className="btn dp-previous-month dp-icon-size"
+                          title="Previous month"
+                          type="button" aria-label="Previous month"
+                          className="btn btn-outline-secondary dp-previous-month dp-icon-size"
                           onClick={this.previousMonth}
                         >
-                          <i aria-hidden="true" className="far fa-angle-left" />
+                          <i aria-hidden="true" className="fal fa-chevron-left" />
                         </button>
                     </td>
                     <td>
@@ -121,11 +149,12 @@ class DatesPickerModal extends React.Component {
                     </td>
                     <td>
                       <button
-                        type="button" aria-label="Right month"
-                        className="btn dp-next-month dp-icon-size"
+                        title="Next month"
+                        type="button" aria-label="Next month"
+                        className="btn btn-outline-secondary dp-next-month dp-icon-size"
                         onClick={this.nextMonth}
                       >
-                        <i aria-hidden="true" className="far fa-angle-right"/>
+                        <i aria-hidden="true" className="fal fa-chevron-right"/>
                       </button>
                     </td>
                   </tr>
@@ -151,8 +180,11 @@ class DatesPickerModal extends React.Component {
                 </tbody>
               </table>
 
-
-
+            <div>
+              <ul className="dp-selected-list" style={{listStyle: 'none'}}>
+                {selectedList}
+              </ul>
+            </div>
 
             </div>
 

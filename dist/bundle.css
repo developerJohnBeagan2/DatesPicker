@@ -5310,7 +5310,7 @@ button.toast-close-button {
 .dp-select-month {
   margin-bottom: 10px; }
 .dp-icon-size {
-  font-size: 2rem; }
+  font-size: 1.4rem; }
 .dp-month-name {
   font-size: 2rem;
   margin-left: 5px;
@@ -5319,3 +5319,13 @@ button.toast-close-button {
   font-size: 2rem;
   margin-left: 5px;
   margin-right: 5px; }
+/*
+    Selected Item List
+*/
+.dp-selected-list > li {
+  margin-top: 20px; }
+.dp-selected-list > li > span {
+  font-size: 1.4rem;
+  margin-right: 20px; }
+.dp-selected-list > li > button {
+  font-size: 0.6rem; }
