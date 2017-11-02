@@ -57,9 +57,9 @@ class DatesPickerModal extends React.Component {
     });
   }
 
-
   saveDates(event) {
     $('.dp-dates-pick').modal('hide');
+    this.props.savePickedDates(this.state.selectedDates);
   }
 
   previousMonth(event) {
@@ -200,6 +200,7 @@ class DatesPickerModal extends React.Component {
 }
 
 DatesPickerModal.propTypes = {
+  savePickedDates: PropTypes.func.isRequired
 };
 
 

@@ -6,6 +6,8 @@ import {withRouter} from 'react-router-dom';
 import TextInput from '../common/TextInput';
 import * as sampleActions from '../../actions/sampleActions';
 import DatesPickerModal from '../controls/datesPicker/DatesPickerModal';
+import SavedDateItem from '../controls/datesPicker/SavedDateItem';
+import * as hf from '../controls/datesPicker/HelperFunctions';
 import toastr from 'toastr';
 //
 class SamplePage extends React.Component {
@@ -15,16 +17,22 @@ class SamplePage extends React.Component {
     super(props, context);
 
     this.state = {
-      datesPicked: Object.assign({}, props.datesPicked),
+      datesPicked: Object.assign([], props.datesPicked),
       formFields: Object.assign({}, props.formFields),
       fieldList: Object.getOwnPropertyNames(props.formFields)
     };
 
     this.updateFormFieldState = this.updateFormFieldState.bind(this);
     this.showPickDates = this.showPickDates.bind(this);
+    this.savePickedDates = this.savePickedDates.bind(this);
 
   } // constructor
 
+  componentWillReceiveProps(nextProps) {
+        if (this.props.datesPicked != nextProps.datesPicked) {
+          this.setState({datesPicked: Object.assign([], nextProps.datesPicked)});
+        }
+      }
 
   // used by onChange to capture user typing
   updateFormFieldState(event) {
@@ -38,7 +46,22 @@ class SamplePage extends React.Component {
     $('.dp-dates-pick').modal('show');
   }
 
+  savePickedDates(selectedDates) {
+    this.props.actions.saveDatesPicked(selectedDates);
+  }
+
+
   render() {
+
+    //debugger;
+
+
+    let selectedList = [];
+    const selectedDates = this.state.datesPicked;
+    selectedDates.forEach(dateObject => {
+      let formattedDate = hf.formatDateObject(dateObject);
+      selectedList.push(<SavedDateItem key={dateObject.id} formattedDate={formattedDate} />) ;
+    });
 
     // prepare form fields for display:
     let firstTwoFields = [];
@@ -69,7 +92,7 @@ class SamplePage extends React.Component {
 
         <form>
 
-          <DatesPickerModal />
+          <DatesPickerModal savePickedDates={this.savePickedDates} />
 
           <br />
           {firstTwoFields}
@@ -81,6 +104,12 @@ class SamplePage extends React.Component {
               </button>
               <div id="idDatePickerSelection" />
          </div>
+
+        <div>
+          <ul style={{listStyle: 'none'}}>
+            {selectedList}
+          </ul>
+        </div>
 
          <br />
          {lastFiveFields}
@@ -94,7 +123,7 @@ class SamplePage extends React.Component {
 
 
 SamplePage.propTypes = {
-  datesPicked: PropTypes.object.isRequired,
+  datesPicked: PropTypes.array.isRequired,
   formFields: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired
@@ -125,9 +154,3 @@ function mapDispatchToProps(dispatch) {
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SamplePage));
 
 
-/*
-
-         <br />
-         {lastFiveFields}
-
-*/

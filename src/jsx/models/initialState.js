@@ -1,5 +1,5 @@
 export default {
-  datesPicked: {},
+  datesPicked: [],
   formFields: {
     one: "",
     two: "",

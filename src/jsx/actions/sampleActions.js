@@ -1,15 +1,18 @@
 import * as types from './actionTypes';
 
-export function saveDatesPickedSuccess(course) {
-  return {type: types.UPDATE_DATES_PICKED_SUCCESS, course};
+
+export function saveDatesPickedSuccess(datesPicked) {
+  return {type: types.UPDATE_DATES_PICKED_SUCCESS, datesPicked};
 }
 
-export function saveFormFieldsSuccess(course) {
-  return {type: types.UPDATE_FORM_FIELDS_SUCCESS, course};
+export function saveFormFieldsSuccess(formFields) {
+  return {type: types.UPDATE_FORM_FIELDS_SUCCESS, formFields};
 }
 
+//
 
 export function saveDatesPicked(datesPicked) {
+
   return function (dispatch, getState) {
     return dispatch(saveDatesPickedSuccess(datesPicked));
   };

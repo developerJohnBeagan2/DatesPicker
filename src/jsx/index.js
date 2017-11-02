@@ -10,7 +10,6 @@ import '../../node_modules/toastr/build/toastr.min.css';
 import '../css/app.css';
 //
 import '../../node_modules/bootstrap/dist/js/bootstrap.js';
-//import {Button} from '../../node_modules/bootstrap/dist/js/bootstrap.min.js';
 //
 import configureStore from './store/configureStore';
 import App from './components/App';
@@ -26,4 +25,6 @@ render(
   </Provider>,
   document.getElementById('app')
 );
+
+
 
