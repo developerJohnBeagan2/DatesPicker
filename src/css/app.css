@@ -33,9 +33,6 @@
     padding: 4px !important; /* currently 8px */
     border: none;
 }
-/*
-    background-color: pink;
-*/
 
 /* calendar table -- */
 .dp-calendar-table > thead > tr > th,
@@ -43,6 +40,22 @@
             padding: 4px !important; /* currently 8px */
             text-align: center;
 }
+.dp-calendar-table > tbody > tr > td > btn {
+    padding-right: 0.75rem;
+}
+@media (max-width: 433px) {
+    .dp-calendar-table > thead > tr > th,
+    .dp-calendar-table > tbody > tr > td {
+                padding: 0px !important; /* currently 8px */
+                margin: 0px;
+                text-align: center;
+    }
+    .dp-calendar-table > tbody > tr > td > btn {
+        padding-right: 0px;
+    }
+}
+
+
 
 .calendar-cell-button {
     font-size: 1.1rem;
@@ -71,6 +84,12 @@
 /*
     Selected Item List
 */
+
+.dp-selected-list, .dp-selected-list > li { list-style-type: none;
+    list-style-position:inside;
+    margin:0;
+    padding:0; }
+
 .dp-selected-list > li {
     margin-top: 20px;
 }
@@ -85,3 +104,42 @@
 .dp-saved-date-item {
     font-size: 1.4rem;
 }
+
+.dvp-ww-font { font-size: 0.6rem; font-weight: bold; color: gray; }
+
+/*
+@media (max-width: 433px) {
+    .dvp-ww-font { font-size: 2rem; font-weight: bold; color: lightskyblue; }
+    .dp-small-table { padding: 0px; margin: 0px; background-color: pink; }
+}
+*/
+
+
+/* Small devices (landscape phones, 576px and up) */
+/*
+@media (min-width: 576px) {
+    .dvp-ww-font { font-size: 2rem; font-weight: bold; color: red; }
+}
+*/
+
+/* Medium devices (tablets, 768px and up) */
+/*
+@media (min-width: 768px) {
+    .dvp-ww-font { font-size: 2rem; font-weight: bold; color: green; }
+
+}
+*/
+
+/* Large devices (desktops, 992px and up) */
+/*
+@media (min-width: 992px) {
+    .dvp-ww-font { font-size: 2rem; font-weight: bold; color: blue; }
+}
+*/
+
+/* Extra large devices (large desktops, 1200px and up) */
+/*
+@media (min-width: 1200px) {
+    .dvp-ww-font { font-size: 2rem; font-weight: bold; color: orange; }
+}
+*/

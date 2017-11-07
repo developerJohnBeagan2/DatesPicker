@@ -7,7 +7,7 @@
     "build": "webpack",
     "open:src": "babel-node tools/runServer.js",
     "start-mess": "babel-node tools/chalkMessage.js",
-    "local-tunnel": "lt --port 3333 --subdomain beagan",
+    "local-tunnel": "lt --port 3333 --subdomain xbeags",
     "ss": "npm-run-all cf build start-mess open:src",
     "lt": "npm-run-all --parallel open:src start-mess local-tunnel"
   },

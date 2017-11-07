@@ -10,6 +10,8 @@ import SavedDateItem from '../controls/datesPicker/SavedDateItem';
 import * as hf from '../controls/datesPicker/HelperFunctions';
 import toastr from 'toastr';
 //
+import WindowWidth from '../development/WindowWidth';
+//
 class SamplePage extends React.Component {
 
   constructor(props, context) {
@@ -26,7 +28,7 @@ class SamplePage extends React.Component {
     this.showPickDates = this.showPickDates.bind(this);
     this.savePickedDates = this.savePickedDates.bind(this);
 
-  } // constructor
+  } // end constructor
 
   componentWillReceiveProps(nextProps) {
         if (this.props.datesPicked != nextProps.datesPicked) {
@@ -88,6 +90,10 @@ class SamplePage extends React.Component {
 
     return (
       <div>
+
+        <WindowWidth />
+
+
         <h1>Form on Sample Page</h1>
 
         <form>
@@ -106,7 +112,7 @@ class SamplePage extends React.Component {
          </div>
 
         <div>
-          <ul style={{listStyle: 'none'}}>
+          <ul className="dp-selected-list" style={{listStyle: 'none'}}>
             {selectedList}
           </ul>
         </div>

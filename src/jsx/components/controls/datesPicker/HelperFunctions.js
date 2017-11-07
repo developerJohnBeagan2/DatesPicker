@@ -1,8 +1,27 @@
+
 export const monthNames = ["January", "February", "March", "April", "May", "June",
 "July", "August", "September", "October", "November", "December"];
 
-export function getMonthName(calendarDate) {
-  return monthNames[calendarDate.getMonth()];
+export const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+export function getMonthName(calendarDate, calendarSize="large") {
+  if(calendarSize=="large" )
+    return monthNames[calendarDate.getMonth()];
+  else
+    return monthNames[calendarDate.getMonth()].substring(0,3);
+}
+
+export function getDayNames(calendarSize="large") {
+  if(calendarSize=="large" ) {
+    return dayNames;
+  }
+  else {
+    let short = [];
+    dayNames.forEach(d =>
+      short.push(d.substring(0,1))
+    );
+    return short;
+  }
 }
 
 export function makeDateArray(calendarDate) {
@@ -53,17 +72,6 @@ export function formatDateObject(dateObject) {
     {weekday: 'short', year: 'numeric', month: 'long', day: 'numeric'});
   return formattedDate;
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 

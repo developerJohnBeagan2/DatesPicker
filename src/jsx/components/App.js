@@ -11,7 +11,7 @@ const App = () => {
 
           <div className="jumbotron">
               <h1>Modal Dates Picker Sample</h1>
-              <p className="lead">When a user needs to pick several dates, and a larger control is needed.</p>
+              <p className="lead">When a user must to pick several dates, and a larger control is needed.</p>
           </div>
 
             <Route exact path="/" component={SamplePage} />
