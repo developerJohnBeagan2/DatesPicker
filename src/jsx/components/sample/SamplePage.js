@@ -9,9 +9,8 @@ import DatesPickerModal from '../controls/datesPicker/DatesPickerModal';
 import SavedDateItem from '../controls/datesPicker/SavedDateItem';
 import * as hf from '../controls/datesPicker/HelperFunctions';
 import toastr from 'toastr';
-//
-import WindowWidth from '../development/WindowWidth';
-//
+
+
 class SamplePage extends React.Component {
 
   constructor(props, context) {
@@ -90,9 +89,6 @@ class SamplePage extends React.Component {
 
     return (
       <div>
-
-        <WindowWidth />
-
 
         <h1>Form on Sample Page</h1>
 

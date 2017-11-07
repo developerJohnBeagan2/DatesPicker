@@ -24,7 +24,11 @@ class SelectedDateItem extends React.Component {
 
     return (
       <li >
-          <span>{this.props.formattedDate}</span>
+
+          <span>
+            {this.props.formattedDate}
+          </span>
+
           <button
             title="Remove this date"
             type="button" aria-label="Remove this date"
@@ -33,6 +37,7 @@ class SelectedDateItem extends React.Component {
           >
             <i aria-hidden="true" className="fas fa-times"/>
           </button>
+
       </li>
 
     );

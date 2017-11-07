@@ -4,9 +4,6 @@ import {connect} from 'react-redux';
 import TableRow from './CalendarTableRow';
 import SelectedDateItem from './SelectedDateItem';
 import * as hf from './HelperFunctions';
-//
-import WindowWidth from '../../development/WindowWidth';
-//
 
 
 class DatesPickerModal extends React.Component {
@@ -22,8 +19,7 @@ class DatesPickerModal extends React.Component {
           selectedDates: [],
           calendarMaxWidth: 0,
           calendarSize: "",
-          daysofWeek: [],
-          tableCssClass: "table table-bordered dp-calendar-table"
+          daysofWeek: []
         };
 
         this.saveDates = this.saveDates.bind(this);
@@ -41,10 +37,8 @@ class DatesPickerModal extends React.Component {
     const currentDate = hf.calcFirstDateofMonth(new Date());
     let calendarMaxWidth = 433;
     let calendarSize = "large";
-    let tabelCssClass = "table table-bordered dp-calendar-table";
     if( this.getWindowWidth() <= calendarMaxWidth) {
       calendarSize = "small";
-      tabelCssClass = "dp-calendar-table";
     }
     this.setState({
       currentDate: currentDate,
@@ -52,8 +46,7 @@ class DatesPickerModal extends React.Component {
       monthName: hf.getMonthName(currentDate, calendarSize),
       daysofWeek: hf.getDayNames(calendarSize),
       calendarMaxWidth: calendarMaxWidth,
-      calendarSize: calendarSize,
-      tabelCssClass: tabelCssClass
+      calendarSize: calendarSize
     });
   }
 
@@ -80,20 +73,18 @@ class DatesPickerModal extends React.Component {
           this.setState({
             calendarSize: "small",
             monthName: hf.getMonthName(this.state.currentDate, "small"),
-            daysofWeek: hf.getDayNames("small"),
-            tabelCssClass: "dp-calendar-table"
+            daysofWeek: hf.getDayNames("small")
           });
-          $("#dpCalendarTable").removeClass().addClass("dp-calendar-table");
+          //$("#dpCalendarTable").removeClass().addClass("dp-calendar-table");
         }
     if( width > this.state.calendarMaxWidth
         && this.state.calendarSize != "large" ) {
           this.setState({
             calendarSize: "large",
             monthName: hf.getMonthName(this.state.currentDate, "large"),
-            daysofWeek: hf.getDayNames("large"),
-            tabelCssClass: "table table-bordered dp-calendar-table"
+            daysofWeek: hf.getDayNames("large")
           });
-          $("#dpCalendarTable").removeClass().addClass("table table-bordered dp-calendar-table");
+          //$("#dpCalendarTable").removeClass().addClass("table table-bordered dp-calendar-table");
         }
   }
 
@@ -129,7 +120,7 @@ class DatesPickerModal extends React.Component {
     this.setState({
       currentDate: newDate,
       calendarArray: hf.makeDateArray(newDate),
-      monthName: hf.getMonthName(newDate)
+      monthName: hf.getMonthName(newDate, this.state.calendarSize)
     });
   }
 
@@ -140,14 +131,12 @@ class DatesPickerModal extends React.Component {
     this.setState({
       currentDate: newDate,
       calendarArray: hf.makeDateArray(newDate),
-      monthName: hf.getMonthName(newDate)
+      monthName: hf.getMonthName(newDate, this.state.calendarSize)
     });
   }
 
 
   render() {
-
-    let tableCssClass = this.state.tableCssClass;
 
     let tableRows = [];
     let days = [];
@@ -225,7 +214,7 @@ class DatesPickerModal extends React.Component {
 
             </div>
 
-              <table id="dpCalendarTable" className={tableCssClass}>
+              <table id="dpCalendarTable" className="table table-bordered dp-calendar-table">
                 <thead>
                   <tr>
                     <th>{this.state.daysofWeek[0]}</th>
@@ -251,7 +240,6 @@ class DatesPickerModal extends React.Component {
             </div>
 
             <div className="modal-footer">
-              <WindowWidth />
               <button type="button" className="btn btn-primary" onClick={this.saveDates}>Save changes</button>
               <button type="button" className="btn btn-secondary" data-dismiss="modal">Cancel</button>
             </div>
