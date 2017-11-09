@@ -14,7 +14,8 @@
     "lint:watch": "npm run lint -- --watch",
     "test": "mocha --reporter spec --require tools/testSetup.js src/jsx/**/*.test.js",
     "test:watch": "npm run test -- --watch",
-    "watch": "npm-run-all --parallel lint:watch test:watch"
+    "watch": "npm-run-all --parallel lint:watch test:watch",
+    "tst": "npm-run-all lint test"
   },
   "babel": {
     "presets": [

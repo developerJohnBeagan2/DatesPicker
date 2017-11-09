@@ -2,10 +2,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
-import SamplePage from './sample/SamplePage';
+import SamplePage from './sample/SamplePage'; //eslint-disable-line import/no-named-as-default
 import { connect } from 'react-redux';
 
-const App = () => {
+export const App = () => {
     return (
         <div className="container">
 
@@ -31,5 +31,3 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default connect(mapStateToProps)(App);
-
-

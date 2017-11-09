@@ -11,7 +11,7 @@ import * as hf from '../controls/datesPicker/HelperFunctions';
 import toastr from 'toastr';
 
 
-class SamplePage extends React.Component {
+export class SamplePage extends React.Component {
 
   constructor(props, context) {
 
@@ -53,9 +53,6 @@ class SamplePage extends React.Component {
 
 
   render() {
-
-    //debugger;
-
 
     let selectedList = [];
     const selectedDates = this.state.datesPicked;
@@ -154,5 +151,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SamplePage));
-
 

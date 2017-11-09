@@ -12,7 +12,7 @@ import '../css/app.css';
 import '../../node_modules/bootstrap/dist/js/bootstrap.js';
 //
 import configureStore from './store/configureStore';
-import App from './components/App';
+import App from './components/App'; //eslint-disable-line import/no-named-as-default
 import initialState from './models/initialState';
 
 const store = configureStore(initialState);
