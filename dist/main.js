@@ -54781,7 +54781,7 @@ var SelectedDateItem = function (_React$Component) {
         null,
         _react2.default.createElement(
           'span',
-          null,
+          { className: 'dp-x' },
           this.props.formattedDate
         ),
         _react2.default.createElement(

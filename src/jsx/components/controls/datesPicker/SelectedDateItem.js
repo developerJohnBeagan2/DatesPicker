@@ -25,7 +25,7 @@ class SelectedDateItem extends React.Component {
     return (
       <li >
 
-          <span>
+          <span className="dp-x">
             {this.props.formattedDate}
           </span>
 
