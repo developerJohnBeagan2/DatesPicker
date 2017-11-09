@@ -73,5 +73,7 @@ export function formatDateObject(dateObject) {
   return formattedDate;
 }
 
-
+export function calcThisCellDate(currentMonthDate, currentDay) {
+  return new Date(currentMonthDate.getFullYear(), currentMonthDate.getMonth(), currentDay);
+}
 

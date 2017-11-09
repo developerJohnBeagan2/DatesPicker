@@ -102,7 +102,7 @@ class SamplePage extends React.Component {
           <div id="idDatePicker">
               <button type="button" onClick={this.showPickDates}
                 className="btn btn-outline-info app-button">
-                Pick Dates...
+                Pick Future Dates...
               </button>
               <div id="idDatePickerSelection" />
          </div>

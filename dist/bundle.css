@@ -5304,6 +5304,18 @@ button.toast-close-button {
   text-align: center; }
 .dp-calendar-table > tbody > tr > td > .btn {
   padding-right: 0.75rem; }
+.dp-disable-link:hover {
+  text-decoration: none; }
+/*
+.btn-link:hover {
+  color: #0056b3;
+  text-decoration: underline;
+  background-color: transparent;
+  border-color: transparent;
+ a:hover
+}
+
+*/
 @media (max-width: 433px) {
   .dp-calendar-table > thead > tr > th, .dp-calendar-table > tbody > tr > td {
     padding: 0px !important;

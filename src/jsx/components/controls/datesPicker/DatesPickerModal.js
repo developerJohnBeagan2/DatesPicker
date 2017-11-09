@@ -147,7 +147,7 @@ class DatesPickerModal extends React.Component {
       else {
         days = this.state.calendarArray.slice(28);
       }
-      tableRows.push(<TableRow key={i} days={days} selectDate={this.selectDate} />);
+      tableRows.push(<TableRow key={i} days={days} selectDate={this.selectDate} currentMonthDate={this.state.currentDate} />);
     } // end for
 
     let selectedList = [];
@@ -169,7 +169,7 @@ class DatesPickerModal extends React.Component {
           <div className="modal-content">
 
             <div className="modal-header">
-              <h5 className="modal-title text-info" >Pick Dates</h5>
+              <h5 className="modal-title text-info" >Pick Future Dates</h5>
               <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
