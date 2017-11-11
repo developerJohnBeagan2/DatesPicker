@@ -6,7 +6,7 @@ import SelectedDateItem from './SelectedDateItem';
 import * as hf from './HelperFunctions';
 
 
-class DatesPickerModal extends React.Component {
+export class DatesPickerModal extends React.Component {
 
   constructor(props, context) {
 

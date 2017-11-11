@@ -1,11 +1,12 @@
-﻿import React from 'react';
+﻿/*eslint-disable import/default */
+import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {withRouter} from 'react-router-dom';
+//import {withRouter} from 'react-router-dom';
 import TextInput from '../common/TextInput';
 import * as sampleActions from '../../actions/sampleActions';
-import DatesPickerModal from '../controls/datesPicker/DatesPickerModal';
+import DatesPickerModal from '../controls/datesPicker/DatesPickerModal'; //eslint-disable-line import/no-named-as-default
 import SavedDateItem from '../controls/datesPicker/SavedDateItem';
 import * as hf from '../controls/datesPicker/HelperFunctions';
 import toastr from 'toastr';
@@ -119,8 +120,7 @@ export class SamplePage extends React.Component {
 SamplePage.propTypes = {
   datesPicked: PropTypes.array.isRequired,
   formFields: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired
 };
 
 
@@ -145,5 +145,5 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SamplePage));
+export default connect(mapStateToProps, mapDispatchToProps)(SamplePage);
 

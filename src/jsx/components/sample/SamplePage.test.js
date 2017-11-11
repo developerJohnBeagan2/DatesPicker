@@ -7,9 +7,7 @@ function setup() {
   const props = {
     datesPicked: [],
     formFields: {},
-    actions: {},
-    history: {}
-
+    actions: {}
   };
   return mount(<SamplePage {...props} />);
 }

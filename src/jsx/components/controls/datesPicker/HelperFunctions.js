@@ -5,6 +5,7 @@ export const monthNames = ["January", "February", "March", "April", "May", "June
 export const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 export function getMonthName(calendarDate, calendarSize="large") {
+
   if(calendarSize=="large" )
     return monthNames[calendarDate.getMonth()];
   else
@@ -25,6 +26,9 @@ export function getDayNames(calendarSize="large") {
 }
 
 export function makeDateArray(calendarDate) {
+    // based on month of passed in date
+    // make array for day numbers that corresponds to
+    //  5 rows and 7 columns of calenar
     let dateArray = Array(35);
     dateArray.fill(0);
     let firstofMonth = calcFirstDateofMonth(calendarDate);
