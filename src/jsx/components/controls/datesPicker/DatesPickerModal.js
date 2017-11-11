@@ -12,14 +12,21 @@ class DatesPickerModal extends React.Component {
 
         super(props, context);
 
+        const currentDate = hf.calcFirstDateofMonth(new Date());
+        let calendarMaxWidth = 433;
+        let calendarSize = "large";
+        if( $('body').outerWidth(true) <= calendarMaxWidth) {
+          calendarSize = "small";
+        }
+
         this.state = {
-          calendarArray: [],
-          currentDate: new Date(),
-          monthName: "",
-          selectedDates: [],
-          calendarMaxWidth: 0,
-          calendarSize: "",
-          daysofWeek: []
+          currentDate: currentDate,
+          calendarArray: hf.makeDateArray(currentDate),
+          monthName: hf.getMonthName(currentDate, calendarSize),
+          daysofWeek: hf.getDayNames(calendarSize),
+          calendarMaxWidth: calendarMaxWidth,
+          calendarSize: calendarSize,
+          selectedDates: []
         };
 
         this.saveDates = this.saveDates.bind(this);
@@ -32,23 +39,6 @@ class DatesPickerModal extends React.Component {
 
   } // constructor
 
-
-  componentWillMount() {
-    const currentDate = hf.calcFirstDateofMonth(new Date());
-    let calendarMaxWidth = 433;
-    let calendarSize = "large";
-    if( this.getWindowWidth() <= calendarMaxWidth) {
-      calendarSize = "small";
-    }
-    this.setState({
-      currentDate: currentDate,
-      calendarArray: hf.makeDateArray(currentDate),
-      monthName: hf.getMonthName(currentDate, calendarSize),
-      daysofWeek: hf.getDayNames(calendarSize),
-      calendarMaxWidth: calendarMaxWidth,
-      calendarSize: calendarSize
-    });
-  }
 
   componentDidMount() {
     window.addEventListener("resize", this.windowResize);
@@ -63,10 +53,7 @@ class DatesPickerModal extends React.Component {
   }
 
   windowResize() {
-    /*
-        ### to remove jQuery, try turning calendar table into component.
-            and see if toggle small/large class works
-    */
+
     let width = this.getWindowWidth();
     if( width <= this.state.calendarMaxWidth
         && this.state.calendarSize != "small" ) {
@@ -75,7 +62,6 @@ class DatesPickerModal extends React.Component {
             monthName: hf.getMonthName(this.state.currentDate, "small"),
             daysofWeek: hf.getDayNames("small")
           });
-          //$("#dpCalendarTable").removeClass().addClass("dp-calendar-table");
         }
     if( width > this.state.calendarMaxWidth
         && this.state.calendarSize != "large" ) {
@@ -84,7 +70,6 @@ class DatesPickerModal extends React.Component {
             monthName: hf.getMonthName(this.state.currentDate, "large"),
             daysofWeek: hf.getDayNames("large")
           });
-          //$("#dpCalendarTable").removeClass().addClass("table table-bordered dp-calendar-table");
         }
   }
 

@@ -18,7 +18,6 @@ export class SamplePage extends React.Component {
     super(props, context);
 
     this.state = {
-      datesPicked: Object.assign([], props.datesPicked),
       formFields: Object.assign({}, props.formFields),
       fieldList: Object.getOwnPropertyNames(props.formFields)
     };
@@ -29,11 +28,6 @@ export class SamplePage extends React.Component {
 
   } // end constructor
 
-  componentWillReceiveProps(nextProps) {
-        if (this.props.datesPicked != nextProps.datesPicked) {
-          this.setState({datesPicked: Object.assign([], nextProps.datesPicked)});
-        }
-      }
 
   // used by onChange to capture user typing
   updateFormFieldState(event) {
@@ -55,7 +49,8 @@ export class SamplePage extends React.Component {
   render() {
 
     let selectedList = [];
-    const selectedDates = this.state.datesPicked;
+
+    const selectedDates = this.props.datesPicked;
     selectedDates.forEach(dateObject => {
       let formattedDate = hf.formatDateObject(dateObject);
       selectedList.push(<SavedDateItem key={dateObject.id} formattedDate={formattedDate} />) ;
@@ -133,8 +128,8 @@ function mapStateToProps(state, ownProps) {
   return {
     // properties to expose on component
     //    like this.prop.courses
-    //    state.courses comes from reducer
-    //      see index/root reducer for name "courses"
+    //    state comes from reducer
+    //      see index/root reducer for name in state."name"
     //        from name used in imports, then in combineReducers
     //  theses names m/tie to root reducer:
     datesPicked: state.datesPicked,

@@ -17430,7 +17430,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 //
 /*eslint-disable import/default */
-var store = (0, _configureStore2.default)(_initialState2.default);
+var store = (0, _configureStore2.default)(_initialState2.default); //eslint-disable-line import/no-named-as-default
+
 //
 
 //
@@ -53757,6 +53758,7 @@ exports['default'] = thunk;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+exports.App = undefined;
 
 var _react = __webpack_require__(6);
 
@@ -53776,7 +53778,7 @@ var _reactRedux = __webpack_require__(76);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var App = function App() {
+var App = exports.App = function App() {
     return _react2.default.createElement(
         'div',
         { className: 'container' },
@@ -53796,7 +53798,8 @@ var App = function App() {
         ),
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _SamplePage2.default })
     );
-}; // This component handles the App template used on every page.
+}; //eslint-disable-line import/no-named-as-default
+// This component handles the App template used on every page.
 
 
 App.propTypes = {
@@ -53819,6 +53822,7 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps)(App);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.SamplePage = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -53870,7 +53874,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var SamplePage = function (_React$Component) {
+var SamplePage = exports.SamplePage = function (_React$Component) {
   _inherits(SamplePage, _React$Component);
 
   function SamplePage(props, context) {
@@ -53878,8 +53882,10 @@ var SamplePage = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (SamplePage.__proto__ || Object.getPrototypeOf(SamplePage)).call(this, props, context));
 
+    //debugger;
+
     _this.state = {
-      datesPicked: Object.assign([], props.datesPicked),
+      //datesPicked: Object.assign([], props.datesPicked),
       formFields: Object.assign({}, props.formFields),
       fieldList: Object.getOwnPropertyNames(props.formFields)
     };
@@ -53893,11 +53899,9 @@ var SamplePage = function (_React$Component) {
 
   _createClass(SamplePage, [{
     key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
-      if (this.props.datesPicked != nextProps.datesPicked) {
-        this.setState({ datesPicked: Object.assign([], nextProps.datesPicked) });
-      }
-    }
+    value: function componentWillReceiveProps(nextProps) {}
+    //        this.setState({datesPicked: Object.assign([], nextProps.datesPicked)});
+
 
     // used by onChange to capture user typing
 
@@ -53924,11 +53928,12 @@ var SamplePage = function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
+      var selectedList = [];
+
       //debugger;
 
-
-      var selectedList = [];
-      var selectedDates = this.state.datesPicked;
+      //const selectedDates = this.state.datesPicked;
+      var selectedDates = this.props.datesPicked;
       selectedDates.forEach(function (dateObject) {
         var formattedDate = hf.formatDateObject(dateObject);
         selectedList.push(_react2.default.createElement(_SavedDateItem2.default, { key: dateObject.id, formattedDate: formattedDate }));
@@ -54010,8 +54015,8 @@ function mapStateToProps(state, ownProps) {
   return {
     // properties to expose on component
     //    like this.prop.courses
-    //    state.courses comes from reducer
-    //      see index/root reducer for name "courses"
+    //    state comes from reducer
+    //      see index/root reducer for name in state."name"
     //        from name used in imports, then in combineReducers
     //  theses names m/tie to root reducer:
     datesPicked: state.datesPicked,
@@ -54199,18 +54204,38 @@ var DatesPickerModal = function (_React$Component) {
   function DatesPickerModal(props, context) {
     _classCallCheck(this, DatesPickerModal);
 
+    //debugger;
+
     var _this = _possibleConstructorReturn(this, (DatesPickerModal.__proto__ || Object.getPrototypeOf(DatesPickerModal)).call(this, props, context));
 
+    var currentDate = hf.calcFirstDateofMonth(new Date());
+    var calendarMaxWidth = 433;
+    var calendarSize = "large";
+    if ($('body').outerWidth(true) <= calendarMaxWidth) {
+      calendarSize = "small";
+    }
+
     _this.state = {
-      calendarArray: [],
-      currentDate: new Date(),
-      monthName: "",
-      selectedDates: [],
-      calendarMaxWidth: 0,
-      calendarSize: "",
-      daysofWeek: []
+      currentDate: currentDate,
+      calendarArray: hf.makeDateArray(currentDate),
+      monthName: hf.getMonthName(currentDate, calendarSize),
+      daysofWeek: hf.getDayNames(calendarSize),
+      calendarMaxWidth: calendarMaxWidth,
+      calendarSize: calendarSize,
+      selectedDates: []
     };
 
+    /*
+            this.state = {
+              currentDate: new Date(),
+              calendarArray: [],
+              monthName: "",
+              daysofWeek: [],
+              calendarMaxWidth: 0,
+              calendarSize: "",
+              selectedDates: []
+            };
+    */
     _this.saveDates = _this.saveDates.bind(_this);
     _this.previousMonth = _this.previousMonth.bind(_this);
     _this.nextMonth = _this.nextMonth.bind(_this);
@@ -54223,13 +54248,12 @@ var DatesPickerModal = function (_React$Component) {
   } // constructor
 
 
-  _createClass(DatesPickerModal, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
-      var currentDate = hf.calcFirstDateofMonth(new Date());
-      var calendarMaxWidth = 433;
-      var calendarSize = "large";
-      if (this.getWindowWidth() <= calendarMaxWidth) {
+  /*
+    componentWillMount() {
+      const currentDate = hf.calcFirstDateofMonth(new Date());
+      let calendarMaxWidth = 433;
+      let calendarSize = "large";
+      if( this.getWindowWidth() <= calendarMaxWidth) {
         calendarSize = "small";
       }
       this.setState({
@@ -54241,9 +54265,14 @@ var DatesPickerModal = function (_React$Component) {
         calendarSize: calendarSize
       });
     }
-  }, {
+  */
+
+
+  _createClass(DatesPickerModal, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
+      /*
+      */
       window.addEventListener("resize", this.windowResize);
     }
   }, {
