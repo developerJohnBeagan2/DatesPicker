@@ -53406,9 +53406,9 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(77);
 
-var _datesPickedReducer = __webpack_require__(450);
+var _datesPickerReducer = __webpack_require__(450);
 
-var _datesPickedReducer2 = _interopRequireDefault(_datesPickedReducer);
+var _datesPickerReducer2 = _interopRequireDefault(_datesPickerReducer);
 
 var _formFieldsReducer = __webpack_require__(451);
 
@@ -53417,7 +53417,7 @@ var _formFieldsReducer2 = _interopRequireDefault(_formFieldsReducer);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var rootReducer = (0, _redux.combineReducers)({
-  datesPicked: _datesPickedReducer2.default,
+  datesPicked: _datesPickerReducer2.default,
   formFields: _formFieldsReducer2.default
 }); /*
         root reducer file
@@ -54272,13 +54272,18 @@ var DatesPickerModal = exports.DatesPickerModal = function (_React$Component) {
       // add to selectedDates array in state
       var currentDate = this.state.currentDate;
       var selectedDate = hf.makeSelectedDateObject(currentDate, dayNum);
-      this.setState(function (prevState) {
-        var newList = [].concat(_toConsumableArray(prevState.selectedDates), [selectedDate]);
-        newList.sort(function (first, second) {
-          return first.id - second.id;
+      var itemExists = this.state.selectedDates.filter(function (o) {
+        return o.id == selectedDate.id;
+      }).length > 0 ? true : false;
+      if (!itemExists) {
+        this.setState(function (prevState) {
+          var newList = [].concat(_toConsumableArray(prevState.selectedDates), [selectedDate]);
+          newList.sort(function (first, second) {
+            return first.id - second.id;
+          });
+          return { selectedDates: newList };
         });
-        return { selectedDates: newList };
-      });
+      }
     }
   }, {
     key: 'removeDate',

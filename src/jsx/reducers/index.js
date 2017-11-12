@@ -4,7 +4,7 @@
 */
 
 import { combineReducers } from 'redux';
-import datesPicked from './datesPickedReducer';
+import datesPicked from './datesPickerReducer';
 import formFields from './formFieldsReducer';
 
 const rootReducer = combineReducers({

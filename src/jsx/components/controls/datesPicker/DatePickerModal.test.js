@@ -33,11 +33,10 @@ describe('DatesPickerModal', () => {
     expect(0).toEqual(wrapper.state().selectedDates.length);
   });
 
-  it('Click 15th link', () => {
+  it('Click 15th link, should add selected date to array', () => {
     //arrange
     const wrapper = setup();
     //act
-    //const numButtons = wrapper.find('button').at(15).length; //returns 1
     const numButton = wrapper.find('button').at(15).find('button');
     numButton.simulate('click');
     //assert
@@ -45,21 +44,6 @@ describe('DatesPickerModal', () => {
   });
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

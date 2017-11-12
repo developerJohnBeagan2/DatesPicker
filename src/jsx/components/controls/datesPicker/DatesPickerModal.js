@@ -77,13 +77,17 @@ export class DatesPickerModal extends React.Component {
     // add to selectedDates array in state
     const currentDate = this.state.currentDate;
     let selectedDate = hf.makeSelectedDateObject(currentDate, dayNum);
-    this.setState((prevState) => {
-      let newList = [...prevState.selectedDates, selectedDate];
-      newList.sort( (first, second) => {
-          return (first.id - second.id);
-        });
-      return {selectedDates: newList};
-    });
+    const itemExists =
+      (this.state.selectedDates.filter(o => o.id == selectedDate.id).length > 0) ? true : false;
+    if (!itemExists) {
+      this.setState((prevState) => {
+        let newList = [...prevState.selectedDates, selectedDate];
+        newList.sort( (first, second) => {
+            return (first.id - second.id);
+          });
+        return {selectedDates: newList};
+      });
+    }
   }
 
   removeDate(dateObjectId) {
