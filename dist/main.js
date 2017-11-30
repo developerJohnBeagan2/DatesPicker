@@ -54656,7 +54656,14 @@ var CalendarTableCell = function (_React$Component) {
 
       var day = this.props.day;
 
+      /*
+          beforeToday = true if cell date is less than begining of today
+      */
       var today = new Date();
+      today.setHours(0);
+      today.setMinutes(0);
+      today.setSeconds(0);
+      today.setMilliseconds(0);
       var beforeToday = false;
 
       var buttonText = "";

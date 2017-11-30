@@ -22,7 +22,14 @@ class CalendarTableCell extends React.Component {
 
     const day = this.props.day;
 
-    const today = new Date();
+    /*
+        beforeToday = true if cell date is less than begining of today
+    */
+    let today = new Date();
+    today.setHours(0);
+    today.setMinutes(0);
+    today.setSeconds(0);
+    today.setMilliseconds(0);
     let beforeToday = false;
 
     let buttonText = "";
