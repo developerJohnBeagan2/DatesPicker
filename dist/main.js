@@ -53390,6 +53390,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // ?
 function configureStore(initialState) {
+
   return (0, _redux.createStore)(_reducers2.default, initialState, (0, _redux.applyMiddleware)(_reduxThunk2.default, (0, _reduxImmutableStateInvariant2.default)()));
 }
 
@@ -53954,6 +53955,8 @@ var SamplePage = exports.SamplePage = function (_React$Component) {
         });
       }
 
+      var today = new Date();
+
       return _react2.default.createElement(
         'div',
         null,
@@ -53965,7 +53968,7 @@ var SamplePage = exports.SamplePage = function (_React$Component) {
         _react2.default.createElement(
           'form',
           null,
-          _react2.default.createElement(_DatesPickerModal2.default, { savePickedDates: this.savePickedDates }),
+          _react2.default.createElement(_DatesPickerModal2.default, { savePickedDates: this.savePickedDates, today: today }),
           _react2.default.createElement('br', null),
           firstTwoFields,
           _react2.default.createElement(
@@ -54202,7 +54205,7 @@ var DatesPickerModal = exports.DatesPickerModal = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (DatesPickerModal.__proto__ || Object.getPrototypeOf(DatesPickerModal)).call(this, props, context));
 
-    var currentDate = hf.calcFirstDateofMonth(new Date());
+    var currentDate = hf.calcFirstDateofMonth(_this.props.today);
     var calendarMaxWidth = 433;
     var calendarSize = "large";
     if ($('body').outerWidth(true) <= calendarMaxWidth) {
@@ -54532,7 +54535,8 @@ var DatesPickerModal = exports.DatesPickerModal = function (_React$Component) {
 }(_react2.default.Component);
 
 DatesPickerModal.propTypes = {
-  savePickedDates: _propTypes2.default.func.isRequired
+  savePickedDates: _propTypes2.default.func.isRequired,
+  today: _propTypes2.default.instanceOf(Date)
 };
 
 exports.default = DatesPickerModal;

@@ -6,7 +6,7 @@ let express = require('express');
 let path = require('path');
 let open = require('open');
 
-const port = 3333;
+const port = 2222;
 const app = express();
 
 app.use('/', express.static(path.join(__dirname, '../dist/')));

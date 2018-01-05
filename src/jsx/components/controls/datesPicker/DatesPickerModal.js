@@ -12,7 +12,7 @@ export class DatesPickerModal extends React.Component {
 
         super(props, context);
 
-        const currentDate = hf.calcFirstDateofMonth(new Date());
+        const currentDate = hf.calcFirstDateofMonth(this.props.today);
         let calendarMaxWidth = 433;
         let calendarSize = "large";
         if( $('body').outerWidth(true) <= calendarMaxWidth) {
@@ -240,7 +240,8 @@ export class DatesPickerModal extends React.Component {
 }
 
 DatesPickerModal.propTypes = {
-  savePickedDates: PropTypes.func.isRequired
+  savePickedDates: PropTypes.func.isRequired,
+  today: PropTypes.instanceOf(Date)
 };
 
 

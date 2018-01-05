@@ -7,8 +7,10 @@ import {DatesPickerModal} from './DatesPickerModal';
 function setup() {
   const props = {
     savePickedDates: () => {},
-    selectedDates: []
+    selectedDates: [],
+    today: new Date(2018, 0, 5)
   };
+  //today: new Date(2018, 0, 5)
   return mount(<DatesPickerModal {...props} />);
 }
 
@@ -27,9 +29,9 @@ describe('DatesPickerModal', () => {
     //arrange
     const wrapper = setup();
     //act
-    const numButtons = wrapper.find('button').length;
+    const numButtons = wrapper.find('.btn-link').length;
     //assert
-    expect(35).toEqual(numButtons);
+    expect(31).toEqual(numButtons);
     expect(0).toEqual(wrapper.state().selectedDates.length);
   });
 

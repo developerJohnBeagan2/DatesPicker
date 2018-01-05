@@ -7,13 +7,13 @@ function setup() {
   const props = {
     match: {}
   };
-  return shallow(<App {...props} />);
+  return shallow(<App {...props} />); // enzyme
 }
 
 describe('App', () => {
   it('App should exist', () => {
     //arrange
-    const wrapper = setup();
+    const wrapper = setup(); // enzyme wrapper
     //act
 
     //assert

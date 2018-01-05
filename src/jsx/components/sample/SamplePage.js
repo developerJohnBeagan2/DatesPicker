@@ -80,6 +80,8 @@ export class SamplePage extends React.Component {
       );
     }
 
+    let today = new Date();
+
     return (
       <div>
 
@@ -87,7 +89,7 @@ export class SamplePage extends React.Component {
 
         <form>
 
-          <DatesPickerModal savePickedDates={this.savePickedDates} />
+          <DatesPickerModal savePickedDates={this.savePickedDates} today={today} />
 
           <br />
           {firstTwoFields}
@@ -106,7 +108,7 @@ export class SamplePage extends React.Component {
           </ul>
         </div>
 
-         <br />
+          <br />
          {lastFiveFields}
 
         </form>
