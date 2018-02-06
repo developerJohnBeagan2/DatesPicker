@@ -54100,11 +54100,6 @@ TextInput.propTypes = {
 
 exports.default = TextInput;
 
-/*
-    <div >{name}</div>
-
-*/
-
 /***/ }),
 /* 460 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -54567,26 +54562,25 @@ var _CalendarTableCell2 = _interopRequireDefault(_CalendarTableCell);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//import {Link} from 'react-router-dom';
-
-//const CalendarTableRow = ({days, someFunctionName}) => {
 var CalendarTableRow = function CalendarTableRow(_ref) {
   var days = _ref.days,
       selectDate = _ref.selectDate,
       currentMonthDate = _ref.currentMonthDate;
 
 
-  var day = 0;
-  var tableCells = [];
-  for (var i = 0; i <= 6; i++) {
-    day = days[i];
-    tableCells.push(_react2.default.createElement(_CalendarTableCell2.default, { key: i, day: day, selectDate: selectDate, currentMonthDate: currentMonthDate }));
-  }
+  //let day = 0;
+  //let tableCells = [];
+  //for (let i = 0; i <= 6; i++) {
+  //day = days[i];
+  //tableCells.push(<TableCell key={i} day={days[i]} selectDate={selectDate} currentMonthDate={currentMonthDate} />);
+  //}
 
   return _react2.default.createElement(
     'tr',
     null,
-    tableCells
+    [0, 1, 2, 3, 4, 5, 6].map(function (i) {
+      return _react2.default.createElement(_CalendarTableCell2.default, { key: i, day: days[i], selectDate: selectDate, currentMonthDate: currentMonthDate });
+    })
   );
 };
 

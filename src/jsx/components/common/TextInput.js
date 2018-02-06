@@ -36,7 +36,3 @@ TextInput.propTypes = {
 
 export default TextInput;
 
-/*
-    <div >{name}</div>
-
-*/
