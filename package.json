@@ -8,7 +8,7 @@
     "open:src": "babel-node tools/runServer.js",
     "start-mess": "babel-node tools/chalkMessage.js",
     "local-tunnel": "lt --port 3333 --subdomain xbeags",
-    "ss": "npm-run-all test lint cf build start-mess open:src",
+    "start": "npm-run-all test lint cf build start-mess open:src",
     "lt": "npm-run-all --parallel open:src start-mess local-tunnel",
     "lint": "node_modules/.bin/esw webpack.config.* src",
     "lint:watch": "npm run lint -- --watch",

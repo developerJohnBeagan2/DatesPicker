@@ -181,10 +181,8 @@ export class DatesPickerModal extends React.Component {
                           <i aria-hidden="true" className="fal fa-chevron-left" />
                         </button>
                     </td>
-                    <td>
+                    <td >
                       <span className="dp-month-name">{this.state.monthName}</span>
-                    </td>
-                    <td>
                       <span className="dp-year text-muted">{this.state.currentDate.getFullYear().toString()}</span>
                     </td>
                     <td>

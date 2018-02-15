@@ -1,8 +1,8 @@
 
-export const monthNames = ["January", "February", "March", "April", "May", "June",
+const monthNames = ["January", "February", "March", "April", "May", "June",
 "July", "August", "September", "October", "November", "December"];
 
-export const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 export function getMonthName(calendarDate, calendarSize="large") {
 
@@ -38,6 +38,7 @@ export function makeDateArray(calendarDate) {
     for (let i = 1; i <= dayNumber; i++) {
         dateArray[offset + i - 1] = i;
     }
+
     return dateArray;
 }
 

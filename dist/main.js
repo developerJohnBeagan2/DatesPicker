@@ -14696,9 +14696,10 @@ exports.calcLastDateofMonth = calcLastDateofMonth;
 exports.makeSelectedDateObject = makeSelectedDateObject;
 exports.formatDateObject = formatDateObject;
 exports.calcThisCellDate = calcThisCellDate;
-var monthNames = exports.monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-var dayNames = exports.dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+var dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 function getMonthName(calendarDate) {
   var calendarSize = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "large";
@@ -14734,6 +14735,7 @@ function makeDateArray(calendarDate) {
   for (var i = 1; i <= dayNumber; i++) {
     dateArray[offset + i - 1] = i;
   }
+
   return dateArray;
 }
 
@@ -54415,11 +54417,7 @@ var DatesPickerModal = exports.DatesPickerModal = function (_React$Component) {
                           'span',
                           { className: 'dp-month-name' },
                           this.state.monthName
-                        )
-                      ),
-                      _react2.default.createElement(
-                        'td',
-                        null,
+                        ),
                         _react2.default.createElement(
                           'span',
                           { className: 'dp-year text-muted' },
@@ -54567,13 +54565,6 @@ var CalendarTableRow = function CalendarTableRow(_ref) {
       selectDate = _ref.selectDate,
       currentMonthDate = _ref.currentMonthDate;
 
-
-  //let day = 0;
-  //let tableCells = [];
-  //for (let i = 0; i <= 6; i++) {
-  //day = days[i];
-  //tableCells.push(<TableCell key={i} day={days[i]} selectDate={selectDate} currentMonthDate={currentMonthDate} />);
-  //}
 
   return _react2.default.createElement(
     'tr',
